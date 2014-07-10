@@ -159,7 +159,9 @@
 // Create a JSON object only if one does not already exist. We create the
 // methods in a closure to avoid creating global variables.
 
-if (typeof JSON !== 'object') {
+// Added one more condition by Yihui Xie, because IE8 will stringify using the
+// "\uxxxx" representation (see rstudio/shiny-server#79 and rstudio/shiny#537).
+if (typeof JSON !== 'object' || JSON.stringify("\uf977").length > 3) {
     JSON = {};
 }
 
